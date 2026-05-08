@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetConnect - Video Feed</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --bg: #f5f6fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .feed {
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Video qismi boshida yashirin bo'ladi */
+        .video-wrapper {
+            display: none;
+            width: 100%;
+            background: #000;
+        }
+
+        video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Muqova (Preview) qismi */
+        .preview-content {
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 250px;
+            background: #2d3436;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+        }
+
+        .info {
+            padding: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Yopish tugmasi */
+        .close-btn {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Video faollashgandagi holat */
+        .active .video-wrapper, .active .close-btn {
+            display: block;
+        }
+
+        .active .preview-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="color: var(--primary);">🐾 PetConnect Media</h2>
+
+    <div class="feed">
+        <!-- 1-Video -->
+        <div class="video-card" id="card1">
+            <button class="close-btn" onclick="closeVideo('card1')">✕</button>
+            <div class="preview-content" onclick="openVideo('card1')">
+                <div class="thumbnail">🐱</div>
+                <div class="info">Quvnoq mushukcha videosini ko'rish</div>
+            </div>
+            <div class="video-wrapper">
+                <video id="vid1" controls>
+                    <source src="" type="video/mp4">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/SnsZY8op17M?si=k4x53tgA2VPwdMaD&amp;start=7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </video>
+            </div>
+        </div>
+
+        <!-- 2-Video -->
+        <div class="video-card" id="card2">
+            <button class="close-btn" onclick="closeVideo('card2')">✕</button>
+            <div class="preview-content" onclick="openVideo('card2')">
+                <div class="thumbnail">🐶</div>
+                <div class="info">Aqlli itning sarguzashtlari</div>
+            </div>
+            <div class="video-wrapper">
+                <video id="vid2" controls>
+                    <source src="https://v.ftcdn.net/02/95/94/62/700_F_295946245_7LpY3iZ6iW8WkZ9G8U0Q9K8J6L5Z5Q6H_ST.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openVideo(cardId) {
+            const card = document.getElementById(cardId);
+            const video = card.querySelector('video');
+            
+            // Kartochkani faollashtirish
+            card.classList.add('active');
+            video.play();
+        }
+
+        function closeVideo(cardId) {
+            const card = document.getElementById(cardId);
+            const video = card.querySelector('video');
+            
+            // Kartochkani boshlang'ich holatga qaytarish
+            card.classList.remove('active');
+            video.pause();
+            video.currentTime = 0; // Videoni boshiga qaytarish
+        }
+    </script>
+
+</body>
+</html>
